@@ -21,8 +21,8 @@ export default function Types() {
     <div className={styles.types}>
       <h2 className={styles.title}>小分类</h2>
       { types.map((type:any, index:number) =>
-        <div className={styles.type}>
-          <h2 key={index} onClick={() => goType(type.id)}>《{type.name}》</h2>
+        <div key={type.id} className={styles.type}>
+          <h2  onClick={() => goType(type.id)}>《{type.name}》</h2>
         </div>
       )}
     </div>

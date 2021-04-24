@@ -5,7 +5,7 @@ export async function getArticleList(params:any) {
   return await fetchGet("/articles", params)
 }
 
-//获取文章
-export async function getRegister(params:any) {
-  return await fetchPost("/user/register", params)
+//获取频道列表
+export async function getChannelList(params:any) {
+  return await fetchGet("/channels", params)
 }

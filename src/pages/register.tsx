@@ -2,7 +2,7 @@ import styles from '@/less/login.less';
 import React, { useState } from 'react';
 import { Form, Input, Button, Space, message } from 'antd';
 import { history } from 'umi';
-import { verifyUser } from '@/api/user'
+import { InsertUser } from '@/api/user'
 
 export default function LoginForm() {
 
@@ -16,7 +16,7 @@ export default function LoginForm() {
   };
 
   const onFinish = (values: any) => {
-    verifyUser(values).then(response=>{
+    InsertUser(values).then(response=>{
       if (typeof response === 'object' && response !== null){
         let status = (response as any).data.status
         if ( status === 200) {
@@ -30,10 +30,6 @@ export default function LoginForm() {
     }, error=> {
       message.error('不对劲！');
     })
-  }
-
-  const goRegister = () => {
-    history.push('/register');
   }
 
   return (
@@ -65,16 +61,17 @@ export default function LoginForm() {
           <Input.Password className={styles.input}/>
         </Form.Item>
 
-        <Form.Item {...tailLayout} >
-          <Space size={'middle'}>
-            <Button type="primary" htmlType="submit">
-              登陆
-            </Button>
+        <Form.Item
+          label="昵称"
+          name="nickname"
+        >
+          <Input className={styles.input}/>
+        </Form.Item>
 
-            <Button onClick={goRegister} >
+        <Form.Item {...tailLayout} >
+            <Button type="primary" htmlType="submit" >
               注册
             </Button>
-          </Space>
         </Form.Item>
       </Form>
     </div>

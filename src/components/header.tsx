@@ -16,7 +16,7 @@ export default function Header() {
   function goTab(type:string) {
     switch(type) {
       case "article": {
-        history.push('/articleList');
+        history.push('/articles');
         break;
       }
       case "photo": {
@@ -47,8 +47,8 @@ export default function Header() {
         </div>
         <div className={styles.tabs}>
           { tabs.map((tab, index) => 
-            <div className={styles.tab}>
-              <h2 key={index} onClick={() => goTab(tab.type)}>{tab.name}</h2>
+            <div key={tab.name} className={styles.tab}>
+              <h2  onClick={() => goTab(tab.type)}>{tab.name}</h2>
             </div>
           )}
         </div>

@@ -4,17 +4,20 @@
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
-  height: 90vh;
+  height: 100%;
   h2 {
-    font-family: 'F';
-    font-size: 25px;
+    // font-family: 'F';
+    font-weight: normal;
+    font-size: 20px;
     padding: 0px;
     margin: 0px;
   }
+  user-select: none;
 }
 
 .type {
   h2 {
+    text-align: center;
     &:hover {
       cursor: pointer;
     }
@@ -26,4 +29,9 @@
   width: 150px;
   padding: 10px;
   border-bottom: 3px solid #483D8B;
+}
+
+.describe {
+  color: #666;
+  text-align: center;
 }

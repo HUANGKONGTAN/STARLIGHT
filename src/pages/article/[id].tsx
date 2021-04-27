@@ -1,10 +1,9 @@
-import { Link } from 'umi';
-import styles from '@/less/home.less';
-import Article from '@/components/article'
-import { getGiftArticle } from '@/api/article'
+
+import Article from '@/components/article';
+import { getArticle } from '@/api/article'
 import { useEffect, useState } from 'react'
 
-export default function Home() {
+export default function ArticlePage(props:any) {
 
   const [title, setTitle] = useState("");
 
@@ -40,7 +39,7 @@ export default function Home() {
       //在后端处理好返回， 前端不应该放太多的数据处理逻辑
       //暂时没找到Go Struct的初始化调用方法， 先在前端稍微处理一下算了
       let date = new Date(data.CreatedAt)
-      let createdAt = `${date.getFullYear()}年${(date.getMonth()+1)}月${date.getDate()}日`
+      let createdAt = `${date.getDate()}-${(date.getMonth()+1)}-${date.getFullYear()}`
       setCreatedAt(createdAt)
     }else{
       setTitle("出错啦。。。。")
@@ -53,7 +52,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    getGiftArticle().then(response=>{
+    getArticle({id: props.match.params.id}).then(response=>{
       if (typeof response === 'object' && response !== null){
         let data = (response as any).data
         if(data.data != null){
@@ -68,11 +67,10 @@ export default function Home() {
 
   return ( 
   <div>
-      <Article article={article}></Article>
+    <Article article={article}></Article>
   </div>
-
   );
   
 }
 
-Home.wrappers = ['@/wrappers/auth']
+ArticlePage.wrappers = ['@/wrappers/auth']

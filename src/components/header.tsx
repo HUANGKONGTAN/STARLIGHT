@@ -36,12 +36,13 @@ export default function Header() {
 
   const { Search } = Input;
 
-  const tabs = [{name:"文", type:"article"}, {name: "相", type:"photo"}, {name:"乐", type:"music"}, {name:"杂", type:"sundry"}];
+  const tabs = [{name:"文字", type:"article"}, {name: "影相", type:"photo"}, {name:"音乐", type:"music"}, {name:"杂物", type:"sundry"}];
 
   return (
     <div>
       <div className={styles.header}>
         <div className={styles.logo}>
+          {/* <img className={styles.logoImg} src={require('@/static/img/psb.jpeg')}></img> */}
           <StarOutlined className={styles.logoStar} style={{ fontSize: '26px', color: 'white' }} />
           <h1 className={styles.logoFont}>星星点灯</h1>
         </div>

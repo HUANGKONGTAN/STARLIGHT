@@ -1,19 +1,17 @@
 import styles from '@/less/article.less';
-import { getArticleList } from '@/api/article'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
 
-export default function Article() {
-
-  const [text, setText] = useState("");
-
+export default function Article(props:any) {
   return (
-    <div>
+    <div className={styles.body}>
       <div className={styles.title}>
-          <h1>欢迎回家</h1>
+          <h1>{props.article.title}</h1>
       </div>
       <div className={styles.content}>
-        {text}
+        {props.article.content}
+      </div>
+      <div className={styles.info}>
+        {props.article.author} 作于 {props.article.createdAt}。
+        <br/>
       </div>
     </div>
   );

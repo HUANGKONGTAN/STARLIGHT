@@ -1,4 +1,5 @@
 .header {
+  z-index: 2;
   position:fixed;
   top:0;
   width: 100%;
@@ -10,6 +11,7 @@
   justify-content: space-between;
   align-items: center;
   align-content: center;
+  user-select:none;
 }
 
 .logo {
@@ -34,7 +36,7 @@
 
 .tab {
   h2 {
-    width: 40px;
+    width: 60px;
     text-align: center;
     color: white;
     font-size: 20px;
@@ -45,8 +47,10 @@
     font-family: 'F';
 
     &:hover {
-      background-color: plum;
-      border-radius: 10px;
+      // background-color: plum;
+      // border-radius: 10px;
+      // color:rgb(16, 120, 224);
+      color:rgb(255, 167, 59);
       cursor: pointer;
     }
   }
@@ -54,5 +58,10 @@
 
 .search {
   width: 200px;
+}
+
+.logoImg {
+  width: 40px;
+  height: 40px;
 }
 

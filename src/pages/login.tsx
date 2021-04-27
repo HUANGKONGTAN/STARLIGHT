@@ -11,8 +11,12 @@ export default function LoginForm() {
     wrapperCol: { span: 16 },
   };
 
-  const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
+  const titleLayout = {
+    wrapperCol: { offset: 7, span: 16 },
+  };
+
+  const buttonGroupLayout = {
+    wrapperCol: { offset: 10, span: 16 },
   };
 
   const onFinish = (values: any) => {
@@ -20,7 +24,7 @@ export default function LoginForm() {
       if (typeof response === 'object' && response !== null){
         let status = (response as any).data.status
         if ( status === 200) {
-          history.push('/home');
+          history.push('/admin/home');
         } else if (status === 1002) {
           message.error('密码错误！');
         }else if (status === 1003) {
@@ -44,7 +48,7 @@ export default function LoginForm() {
       onFinish={onFinish}
       >
         <Form.Item 
-        {...tailLayout}
+        {...titleLayout}
         >
           <h1>欢乐时光要结束了。</h1>
         </Form.Item>
@@ -65,7 +69,7 @@ export default function LoginForm() {
           <Input.Password className={styles.input}/>
         </Form.Item>
 
-        <Form.Item {...tailLayout} >
+        <Form.Item {...buttonGroupLayout} >
           <Space size={'middle'}>
             <Button type="primary" htmlType="submit">
               登陆

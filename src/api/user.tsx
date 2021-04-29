@@ -9,3 +9,8 @@ export async function verifyUser(params:any) {
 export async function InsertUser(params:any) {
   return await fetchPost("/user", params)
 }
+
+// 状态验证
+export async function getAuth() {
+  return await fetchGet("/user/auth")
+}

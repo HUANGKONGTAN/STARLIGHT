@@ -12,6 +12,10 @@ export default function Header() {
   function goSearch() {
     history.push('/login');
   }
+  
+  const goHome = () => {
+    history.push('/home');
+  }
 
   function goTab(type:string) {
     switch(type) {
@@ -41,10 +45,9 @@ export default function Header() {
   return (
     <div>
       <div className={styles.header}>
-        <div className={styles.logo}>
-          {/* <img className={styles.logoImg} src={require('@/static/img/psb.jpeg')}></img> */}
-          <StarOutlined className={styles.logoStar} style={{ fontSize: '26px', color: 'white' }} />
-          <h1 className={styles.logoFont}>星星点灯</h1>
+        <div className={styles.logo} onClick={()=>goHome()}>
+          {/* <StarOutlined className={styles.logoStar} style={{ fontSize: '26px', color: 'white' }} /> */}
+          <h1 className={styles.title}>星星点灯</h1>
         </div>
         <div className={styles.tabs}>
           { tabs.map((tab, index) => 

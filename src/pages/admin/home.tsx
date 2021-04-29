@@ -1,10 +1,12 @@
 import styles from '@/less/admin/home.less';
-
-export default function AdminHome() {
+ function AdminHome() {
   return ( 
-  <div className={styles.home}>
-      <h1>aaa</h1>
-  </div>
-
+    <div className={styles.home}>
+        <h1>管理员首页</h1>
+    </div>
   );
 }
+
+AdminHome.wrappers = ['@/pages/wrappers/auth']
+
+export default AdminHome;

@@ -45,8 +45,6 @@ export default function ArticleList() {
   return (
     <div className={styles.articles}>
       <div className={styles.list}>
-        <Pagination showQuickJumper total={total} onChange={onChange} />
-        <Divider />
         {ArticleList.map((article:any) => 
           <div key={article.ID} className={styles.article}>
             <h2 className={styles.title} onClick={() => goArticle(article.ID)}>{article.Title}</h2>
@@ -55,7 +53,6 @@ export default function ArticleList() {
             <Divider />
           </div>
         )}
-        <Divider />
         <Pagination showQuickJumper total={total} onChange={onChange} />
       </div>
     </div>

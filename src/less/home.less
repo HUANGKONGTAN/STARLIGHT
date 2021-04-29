@@ -1,67 +1,122 @@
-@font-face {
-	font-family: 'F';
-	src: url('../less/yuan.ttf') format('truetype');
+.home {
+  display: flex;
+  flex-direction: column;
 }
 
-.body{
-	display: flex;
+.welcome {
+  text-align: center;
 }
 
-.sider{
-    width: 12%;
-    justify-content: flex-end;
-}
+.gift {
+  user-select: none;
+  padding: 0;
+  margin: 0 auto;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  border-radius: 10px;
+  background-color: rgba(236, 240, 241,1.0);
+  text-align: center;
+  border-radius: 10px;
 
-.header{
-    
-}
-
-.link{
-    font-size: 50px;
-}
-
-.sider{
-	font-size: 30px;
-    font-family: "F";
-}
-
-.leftSider:extend(.sider){
-    text-align: right;
-}
-
-.rightSider:extend(.sider){
-    text-align: left;
-}
-
-.menu{
+  .article {
+    width: 500px;
     height: 100px;
-    line-height: 100px;
-}
+    display: flex;
+    .tab {
+      width: 150px;
+      border-radius: 10px;
+      background-color: rgb(119, 139, 235);
+      p {
+        line-height: 100px;
+        padding-top: 5px;
+        font-size: 40px;
+        font-family: 'C';
+        color: white;
+      }
+    }
+  
+    .body {
+      width: 350px;
+      .title{
+        p {
+          line-height: 100px;
+          color: rgb(10, 61, 98);
+          font-weight: 320;
+          font-size: 36px;
+        }
+      }
+    }
 
-.article{
-    width: 100%;
-    justify-content: flex-start;
-}
+    &:hover {
+      cursor: pointer;
+    }
+  }
 
-.title{
-    font-family: "F";
-    font-size: 100px;
-    height: 200px;
-    font-weight: normal;
-}
+  .photo {
+    width: 500px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    .tab {
+      width: 100%;
+      height: 100px;
+      background-color: rgb(225, 95, 65);
+      border-radius: 10px;
+      p {
+        font-family: 'C';
+        line-height: 100px;
+        padding-top: 5px;
+        font-weight: 320;
+        font-size: 40px;
+        color: white;
+      }
+    }
 
-.title p{
-    line-height: 210px;
-    text-align: center;
-}
+    .body {
+      .img {
+        width: 500px;
+        height: 500px;
+      }
+    }
+  }
 
-.footer{
-    text-align: center;
-    font-family: "F";
-}
+  
 
-.container{
-    margin: 0 auto;
-    width: 800px;
-    font-family: "F";
+  .music {
+    width: 500px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    .tab {
+      width: 100%;
+      height: 100px;
+      background-color: rgb(196, 69, 105);
+      border-radius: 10px;
+      p {
+        font-family: 'C';
+        line-height: 100px;
+        padding-top: 5px;
+        font-weight: 320;
+        font-size: 40px;
+        color: white;
+      }
+    }
+
+    .body {
+      .img {
+        width: 500px;
+        height: 500px;
+      }
+    }
+  }
+
+  .musicTab {
+    // .tab();
+    background-color: rgb(196, 69, 105);
+  }
+
+  .sundryTab {
+    // .tab();
+    background-color: rgb(48, 57, 82);
+  }
 }

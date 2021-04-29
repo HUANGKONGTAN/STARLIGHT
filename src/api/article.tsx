@@ -19,3 +19,8 @@ export async function getChannelList(params:any) {
 export async function getGiftArticle() {
   return await fetchGet("/article/gift")
 }
+
+//删除文章
+export async function deleteArticle(params:any) {
+  return await fetchDelete("/article", params)
+}

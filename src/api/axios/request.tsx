@@ -53,10 +53,10 @@ export function fetchPut(url:string, params:any) {
   })
 }
 
-export function fetchDelete(url:string, data:any) {
+export function fetchDelete(url:string, params:any) {
   return new Promise((resolve, reject) => {
       HTTP.delete(url, {
-        data: data
+        params: params
       }).then(response => {
         resolve(response);
       }, err => {

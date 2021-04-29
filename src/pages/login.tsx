@@ -22,12 +22,14 @@ export default function LoginForm() {
   const onFinish = (values: any) => {
     verifyUser(values).then(response=>{
       if (typeof response === 'object' && response !== null){
-        let status = (response as any).data.status
-        if ( status === 200) {
+        let data = (response as any).data
+        if ( data.status === 200) {
+          console.log(data.data.UserName)
+          window.localStorage.setItem("username", data.data.UserName)
           history.push('/admin/home');
-        } else if (status === 1002) {
+        } else if (data.status === 1002) {
           message.error('密码错误！');
-        }else if (status === 1003) {
+        }else if (data.status === 1003) {
           message.error('用户名不存在！');
         }
       }

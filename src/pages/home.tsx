@@ -1,78 +1,89 @@
-import { Link } from 'umi';
 import styles from '@/less/home.less';
-import Article from '@/components/article'
 import { getGiftArticle } from '@/api/article'
 import { useEffect, useState } from 'react'
+import { history } from 'umi'
 
 export default function Home() {
 
-  const [title, setTitle] = useState("");
+  const [ArticleID, setArticleID] = useState(0)
 
-  const [content, setContent] = useState("");
-
-  const [author, setAuthor] = useState("admin");
-
-  const [readAmount, setReadAmount] = useState(0);
-
-  const [likeAmount, setLikeAmount] = useState(0);
-
-  const [createdAt, setCreatedAt] = useState("");
-
-  
-
-  let article = {
-    title: title,
-    content: content,
-    author: author,
-    readAmount: readAmount,
-    likeAmount: likeAmount,
-    createdAt: createdAt
-  }
-  
-  const initArticle = (data:any, empty=false) => {
-    if(!empty){
-      setTitle(data.Title)
-      setContent(data.Content)
-      setAuthor(data.Author)
-      setReadAmount(data.ReadAmount)
-      setLikeAmount(data.LikeAmount)
-      //日期格式的初始化应该是放在ViewModel的初始化后
-      //在后端处理好返回， 前端不应该放太多的数据处理逻辑
-      //暂时没找到Go Struct的初始化调用方法， 先在前端稍微处理一下算了
-      let date = new Date(data.CreatedAt)
-      let createdAt = `${date.getFullYear()}年${(date.getMonth()+1)}月${date.getDate()}日`
-      setCreatedAt(createdAt)
-    }else{
-      setTitle("出错啦。。。。")
-      setContent(data)
-      setAuthor("admin")
-      setReadAmount(0)
-      setLikeAmount(0)
-      setCreatedAt("1970-1-1")
-    }
-  }
+  const [ArticleTitle, setArticleTitle] = useState("")
 
   useEffect(() => {
     getGiftArticle().then(response=>{
       if (typeof response === 'object' && response !== null){
         let data = (response as any).data
         if(data.data != null){
-          initArticle(data.data)
-        }else {
-          initArticle(data.message, true)
+          setArticleID(data.data.ID)
+          setArticleTitle(data.data.Title)
         }
       }
     })
   }, []);
 
+  const goArticle = (id:number) => {
+    history.push(`/article/${id}`)
+  }
 
   return ( 
-  <div>
-      <Article article={article}></Article>
-  </div>
+    <div className={styles.home}>
+      {/* <ArticleRender id={ArticleID} type={'show'}></ArticleRender> */}
+      <div className={styles.welcome}>
+        <h1> 欢迎回家。</h1>
+      </div>
 
+      {/* 每日文章 */}
+      <div className={styles.gift}>
+        <div className={styles.article} onClick={()=> {goArticle(ArticleID)}}>
+          <div className={styles.tab} >
+            <p>今日文章</p>
+          </div>
+          <div className={styles.body}>
+            <div className={styles.title}>
+              <p>{ArticleTitle}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 每日摄影 */}
+      <div className={styles.gift}>
+        <div className={styles.photo}>
+          <div className={styles.tab} >
+            <p>今日摄影</p>
+          </div>
+          <div className={styles.body}>
+            <img className={styles.img} src={require('@/static/img/psb.jpeg')}/>  
+          </div>
+        </div>
+      </div>
+
+      {/* 每日音乐 */}
+      <div className={styles.gift}>
+        <div className={styles.music} onClick={()=> {goArticle(ArticleID)}}>
+          <div className={styles.tab} >
+            <p>今日音乐</p>
+          </div>
+        </div>
+        <div className={styles.body}>
+          <div className={styles.title}>
+            <p>{ArticleTitle}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* 杂七杂八 */}
+      <div className={styles.gift}>
+        <div className={styles.sundryTab} onClick={()=> {goArticle(ArticleID)}}>
+          <p>杂七杂八</p>
+        </div>
+        <div className={styles.body}>
+          <div className={styles.title}>
+            <p>{ArticleTitle}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
   );
-  
 }
-
-Home.wrappers = ['@/wrappers/auth']

@@ -1,16 +1,34 @@
-import { Table, Button, Dropdown, Menu, Input } from 'antd';
+import { Table, Button, Dropdown, Menu, Input, Modal, message } from 'antd';
 import { useEffect, useState } from 'react';
-import { getArticleList } from '@/api/article';
+import { getArticle, getArticleList, deleteArticle } from '@/api/article';
 import { DownOutlined, EllipsisOutlined } from '@ant-design/icons';
 import styles from '@/less/admin/articles.less'
+import { history } from 'umi'
 
-export default function AdminArticles() {
+function AdminArticles() {
 
   const [articleList, setArticleList] = useState([])
 
   const [total, setTotal] = useState(0)
 
+  const [PreviewModalVisible, setPreviewModalVisible] = useState(false);
+
+  const [DeleteModalVisible, setDeleteModalVisible] = useState(false);
+ 
+  const [ArticleTitle, setArticleTitle] = useState("")
+
+  const [ArticleContent, setArticleContent] = useState("")
+
+  // let title
+  // let content
+
+
+
   useEffect(() => {
+    loadArticleList()
+  }, []);
+
+  const loadArticleList = () => {
     getArticleList({}).then(response=>{
       if (typeof response === 'object' && response !== null){
         let data = (response as any).data
@@ -18,17 +36,55 @@ export default function AdminArticles() {
         setTotal(data.total)
       }
     })
-  }, []);
+  }
 
-  const menu = (
+  const goPreview = (id:number) => {
+    getArticle({id:id}).then(response=>{
+      if (typeof response === 'object' && response !== null){
+        let data = (response as any).data
+        if(data.data != null){
+          setArticleTitle(data.data.Title)
+          setArticleContent(data.data.Content)
+          // title = data.data.Title
+          // content = data.data.Content
+          setPreviewModalVisible(true)
+        }
+      }
+    })
+  }
+
+  const goEdit = (id:number) => {
+    history.push(`/admin/article/edit/${id}`)
+  }
+
+  const goDelete = (id:number) => {
+    Modal.confirm({
+      title: null,
+      content: '确认删除吗？',
+      okText: '删除',
+      cancelText: '取消',
+      onOk: ()=>DeleteArticle(id)
+    });
+  }
+
+  const DeleteArticle = (id:number) => {
+    deleteArticle({id:id}).then(response=>{
+      if((response as any).data.status === 200){
+        message.success('删除成功！');
+        loadArticleList();
+      }
+    })
+  }
+
+  const menu = (record:any) => (
     <Menu>
-      <Menu.Item key="1" className={styles.menuItem} onClick={}>
+      <Menu.Item key="1" className={styles.menuItem} onClick={()=>goPreview(record.ID)}>
         预览
       </Menu.Item>
-      <Menu.Item key="2" className={styles.menuItem}>
+      <Menu.Item key="2" className={styles.menuItem} onClick={()=>goEdit(record.ID)}>
         编辑
       </Menu.Item>
-      <Menu.Item key="3" className={styles.menuItem}>
+      <Menu.Item key="3" className={styles.menuItem} onClick={()=>goDelete(record.ID)}>
         删除
       </Menu.Item>
     </Menu>
@@ -76,10 +132,10 @@ export default function AdminArticles() {
       width: 260,
       fixed: 'right',
       key: 'operation',
-      render: () => 
+      render: (text: any, record: any) => 
       <div>
-          <Dropdown overlay={menu} trigger={["click"]}>
-            <Button>            
+          <Dropdown overlay={menu(record)} trigger={["click"]}>
+            <Button>       
               <EllipsisOutlined/>
               <DownOutlined />
             </Button>
@@ -100,7 +156,22 @@ export default function AdminArticles() {
         dataSource={articleList} 
         scroll={{ x: 1200, y: 400 }} 
         pagination={{ position: ['bottomCenter'], pageSize: 5}}
+        rowKey={record => (record as any).ID}
       />
+      <Modal 
+        visible={PreviewModalVisible} 
+        closable={true} footer={null} 
+        onCancel={()=> setPreviewModalVisible(false)}
+      > 
+        <div className={styles.preview}>
+          <h1>{ArticleTitle}</h1>
+          <p>{ArticleContent}</p>
+        </div>
+      </Modal>
     </div>
   );
 }
+
+AdminArticles.wrappers = ['@/pages/wrappers/auth']
+
+export default AdminArticles

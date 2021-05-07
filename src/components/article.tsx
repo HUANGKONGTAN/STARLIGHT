@@ -1,5 +1,5 @@
 import styles from '@/less/article.less';
-import { Input, Button } from 'antd'
+import { Input, Button, message } from 'antd'
 import { useEffect, useState } from 'react';
 
 const { TextArea } = Input;
@@ -10,13 +10,15 @@ export default function Article(props:any) {
 
   const [content, setContent] = useState("")
 
+  const ILikeIt = () => {
+    message.success('点赞成功，感谢支持！');
+  }
+
   useEffect(() => {
     setTitle(props.article.title)
     setContent(props.article.content)
-  },[props.id]);
+  });
 
-  
-  
   if(props.type === 'show'){
     return (
       <div className={styles.body}>
@@ -27,7 +29,7 @@ export default function Article(props:any) {
           {props.article.content}
         </div>
         <div className={styles.info}>
-          <Button type='primary'>点赞</Button>
+          <Button type='primary' onClick={()=> ILikeIt()}>点赞</Button>
           <p>{props.article.author} 作于 {props.article.createdAt}。</p>
         </div>
       </div>

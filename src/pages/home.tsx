@@ -33,37 +33,31 @@ export default function Home() {
       </div>
 
       {/* 每日文章 */}
-      <div className={styles.gift}>
-        <div className={styles.article} onClick={()=> {goArticle(ArticleID)}}>
-          <div className={styles.tab} >
-            <p>今日文章</p>
-          </div>
-          <div className={styles.body}>
-            <div className={styles.title}>
-              <p>{ArticleTitle}</p>
-            </div>
+      <div className={styles.article} onClick={()=> {goArticle(ArticleID)}}>
+        <div className={styles.tab} >
+          <p>今日文章</p>
+        </div>
+        <div className={styles.body}>
+          <div className={styles.title}>
+            <p>{ArticleTitle}</p>
           </div>
         </div>
       </div>
 
       {/* 每日摄影 */}
-      <div className={styles.gift}>
-        <div className={styles.photo}>
-          <div className={styles.tab} >
-            <p>今日摄影</p>
-          </div>
-          <div className={styles.body}>
-            <img className={styles.img} src={require('@/static/img/psb.jpeg')}/>  
-          </div>
+      <div className={styles.photo}>
+        <div className={styles.tab} >
+          <p>今日摄影</p>
+        </div>
+        <div className={styles.body}>
+          <img className={styles.img} src={require('@/static/img/psb.jpeg')}/>  
         </div>
       </div>
 
       {/* 每日音乐 */}
-      <div className={styles.gift}>
-        <div className={styles.music} onClick={()=> {goArticle(ArticleID)}}>
-          <div className={styles.tab} >
-            <p>今日音乐</p>
-          </div>
+      <div className={styles.music} onClick={()=> {goArticle(ArticleID)}}>
+        <div className={styles.tab} >
+          <p>今日音乐</p>
         </div>
         <div className={styles.body}>
           <div className={styles.title}>

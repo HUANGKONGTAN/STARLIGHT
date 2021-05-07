@@ -1,7 +1,7 @@
 import styles from '@/less/header.less';
 import { Button, Input } from 'antd';
-import { StarOutlined } from '@ant-design/icons';
 import { history } from 'umi'
+import { useState, useEffect } from 'react'
 
 export default function Header() {
 
@@ -15,6 +15,10 @@ export default function Header() {
   
   const goHome = () => {
     history.push('/home');
+  }
+
+  const goAdmin = () => {
+    history.push('/admin/home');
   }
 
   function goTab(type:string) {
@@ -40,7 +44,30 @@ export default function Header() {
 
   const { Search } = Input;
 
+  
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  function Login() {
+    if (isLoggedIn) {
+      return (
+        <Button type="primary" onClick={goAdmin}>
+          后台
+        </Button>
+      )
+    }
+    return (
+      <Button type="primary" onClick={goLogin}>
+        登陆
+      </Button>
+    )
+  }
+
   const tabs = [{name:"文字", type:"article"}, {name: "影相", type:"photo"}, {name:"音乐", type:"music"}, {name:"杂物", type:"sundry"}];
+
+  useEffect(() => {
+    setIsLoggedIn(window.localStorage.getItem('username') ? true : false)
+    console.log(isLoggedIn)
+  })
 
   return (
     <div>
@@ -64,9 +91,7 @@ export default function Header() {
           className={styles.search}
         />
         <div className={styles.login}>
-          <Button type="primary" onClick={goLogin}>
-            登陆
-          </Button>
+          <Login />
         </div>
       </div>
     </div>

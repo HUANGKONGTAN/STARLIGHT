@@ -1,4 +1,4 @@
-import { Table, Button, Dropdown, Menu, Input, Modal, message } from 'antd';
+import { Table, Button, Dropdown, Menu, Input, Modal, message, Space } from 'antd';
 import { useEffect, useState } from 'react';
 import { getArticle, getArticleList, deleteArticle } from '@/api/article';
 import { DownOutlined, EllipsisOutlined } from '@ant-design/icons';
@@ -18,11 +18,6 @@ function AdminArticles() {
   const [ArticleTitle, setArticleTitle] = useState("")
 
   const [ArticleContent, setArticleContent] = useState("")
-
-  // let title
-  // let content
-
-
 
   useEffect(() => {
     loadArticleList()
@@ -45,8 +40,6 @@ function AdminArticles() {
         if(data.data != null){
           setArticleTitle(data.data.Title)
           setArticleContent(data.data.Content)
-          // title = data.data.Title
-          // content = data.data.Content
           setPreviewModalVisible(true)
         }
       }
@@ -98,10 +91,6 @@ function AdminArticles() {
       dataIndex: 'Title',
       fixed: 'left'
     },
-    // {
-    //   title: '内容',
-    //   dataIndex: 'Content',
-    // },
     {
       title: '频道',
       align: 'center',
@@ -147,7 +136,7 @@ function AdminArticles() {
   return ( 
     <div className={styles.articlesTable}>
       <div className={styles.searchGroup}>
-        <Input.Search allowClear style={{ width: '15%' }}/>
+        <Input.Search allowClear style={{ width: '25%' }}/>
       </div> 
       <Table 
         rowClassName={styles.tableRow}

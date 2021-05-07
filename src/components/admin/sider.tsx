@@ -4,7 +4,7 @@ import { history } from 'umi'
 
 export default function AdminSider() {  
 
-  const tabs = [{name:"文字", type:"articles"}, {name: "影相", type:"photo"}, {name:"音乐", type:"music"}, {name:"杂物", type:"sundry"}];
+  const tabs = [{name:"首页", type:"home"}, {name:"文字", type:"articles"}, {name: "影相", type:"photo"}, {name:"音乐", type:"music"}, {name:"杂物", type:"sundry"}];
 
   const goHome = () => {
     history.push('/home')
@@ -17,8 +17,11 @@ export default function AdminSider() {
   return (
     <div className={styles.sider}>
       <div className={styles.tabs}>
-      <Button type="primary" onClick={goHome}>回家</Button>
-        { tabs.map((tab, index) => 
+      <div className={styles.logo} onClick={goHome}>
+        <p>星星</p>
+        <p>点灯</p>
+      </div>
+        { tabs.map((tab) => 
           <div key={tab.name} className={styles.tab}>
             <h2 onClick={()=>goTab(tab.type)}>{tab.name}</h2>
           </div>

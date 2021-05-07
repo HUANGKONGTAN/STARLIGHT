@@ -52,6 +52,7 @@ export default function ArticleRender(props:any) {
   }
 
   useEffect(() => {
+    console.log(props.id)
     getArticle({id: props.id}).then(response=>{
       if (typeof response === 'object' && response !== null){
         let data = (response as any).data
@@ -61,6 +62,7 @@ export default function ArticleRender(props:any) {
           initArticle(data.message, true)
         }
       }
+      console.log(article)
     })
   },[props.id]);
 

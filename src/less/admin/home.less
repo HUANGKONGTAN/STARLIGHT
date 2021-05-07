@@ -1,3 +1,73 @@
 .home {
   height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.Row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.Col {
+  width: 400px;
+  height: 150px;
+  border-radius: 10px;
+
+  p{
+    padding-top: 8px;
+    text-align: center;
+    color: white;
+    font-family: 'C';
+    font-size: 60px;
+    line-height:  150px;
+    margin: 0;
+  }
+
+  .tran {
+    transition-duration: 0.5s;
+    transition-timing-function: ease-out;
+  }
+
+  .article {
+    border-radius: 10px;
+    background-color: rgb(119, 139, 235);
+    &:hover {
+      .tran();
+      background-color: rgb(99, 59, 165);
+    }
+  }
+
+  .photo {
+    border-radius: 10px;
+    background-color: rgb(225, 95, 65);
+    &:hover {
+      .tran();
+      background-color: rgb(175, 55, 35);
+    }
+  }
+
+  .music {
+    border-radius: 10px;
+    background-color: rgb(196, 69, 105);
+    &:hover {
+      .tran();
+      background-color: rgb(136, 39, 85);
+    }
+  }
+
+  .sundry {
+    border-radius: 10px;
+    background-color: rgb(48, 57, 82);
+    &:hover {
+      .tran();
+      background-color: rgb(28, 29, 45);
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
 }

@@ -1,4 +1,4 @@
-import styles from '@/less/article.less'
+import styles from '@/less/article/article.less'
 import { Input, Button } from 'antd'
 
 const { TextArea } = Input;

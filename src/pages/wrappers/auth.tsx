@@ -5,7 +5,6 @@ export default (props:any) => {
 
   const { isLogin } = useAuth();
 
-  // 
   
   if (isLogin) {
     return <div>{ props.children }</div>;

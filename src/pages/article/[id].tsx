@@ -1,4 +1,4 @@
-import ArticleRender from '@/components/articleRender';
+import ArticleRender from '@/components/article/articleRender';
 
 export default function ArticlePage(props:any) {
   return ( 

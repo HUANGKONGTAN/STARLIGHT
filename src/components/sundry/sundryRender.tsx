@@ -1,9 +1,9 @@
 
-import Article from '@/components/article';
-import { getArticle } from '@/api/article'
+import Sundry from '@/components/sundry/sundry';
+import { getSundry } from '@/api/sundry'
 import { useEffect, useState } from 'react'
 
-export default function ArticleRender(props:any) {
+export default function SundryRender(props:any) {
 
   const [title, setTitle] = useState("");
 
@@ -19,7 +19,7 @@ export default function ArticleRender(props:any) {
 
   
 
-  let article = {
+  let sundry = {
     title: title,
     content: content,
     author: author,
@@ -28,16 +28,13 @@ export default function ArticleRender(props:any) {
     createdAt: createdAt
   }
   
-  const initArticle = (data:any, empty=false) => {
+  const initSundry = (data:any, empty=false) => {
     if(!empty){
       setTitle(data.Title)
       setContent(data.Content)
       setAuthor(data.Author)
       setReadAmount(data.ReadAmount)
       setLikeAmount(data.LikeAmount)
-      //日期格式的初始化应该是放在ViewModel的初始化后
-      //在后端处理好返回， 前端不应该放太多的数据处理逻辑
-      //暂时没找到Go Struct的初始化调用方法， 先在前端稍微处理一下算了
       let date = new Date(data.CreatedAt)
       let createdAt = `${date.getDate()}-${(date.getMonth()+1)}-${date.getFullYear()}`
       setCreatedAt(createdAt)
@@ -53,23 +50,23 @@ export default function ArticleRender(props:any) {
 
   useEffect(() => {
     console.log(props.id)
-    getArticle({id: props.id}).then(response=>{
+    getSundry({id: props.id}).then(response=>{
       if (typeof response === 'object' && response !== null){
         let data = (response as any).data
         if(data.data != null){
-          initArticle(data.data)
+          initSundry(data.data)
         }else {
-          initArticle(data.message, true)
+          initSundry(data.message, true)
         }
       }
-      console.log(article)
+      console.log(sundry)
     })
   },[props.id]);
 
 
   return ( 
     <div>
-      <Article article={article} type={props.type}></Article>
+      <Sundry sundry={sundry} type={props.type}></Sundry>
     </div>
   );
 }

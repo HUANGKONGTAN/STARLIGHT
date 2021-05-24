@@ -1,12 +1,14 @@
-import { Link } from 'umi';
-import styles from '@/less/articles.less';
-import ArticleList from '@/components/articles';
-import { PageHeader } from 'antd'
+import ArticleList from '@/components/article/articles';
+import Sider from '@/components/sider';
+import styles from '@/less/article/articles.less'
 
 export default function Articles() {
   return ( 
-  <div>
-    <ArticleList></ArticleList>
+  <div className={styles.articlePage}>
+    <div className={styles.articleList}>
+      <ArticleList></ArticleList>
+    </div>
+    <Sider></Sider>
   </div>
   );
 }

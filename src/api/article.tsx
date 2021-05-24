@@ -24,3 +24,8 @@ export async function getGiftArticle() {
 export async function deleteArticle(params:any) {
   return await fetchDelete("/article", params)
 }
+
+//搜索文章
+export async function findArticle(params:any) {
+  return await fetchGet("/article/search", params)
+}

@@ -5,15 +5,24 @@ import { useState, useEffect } from 'react'
 
 export default function Header() {
 
+  const [Active, setActive] = useState("")
+
   function goLogin() {
+    setActive("")
     history.push('/login');
   }
 
-  function goSearch() {
-    history.push('/login');
+  const goSearch = (value:string) => {
+    history.push({
+      pathname: '/search',
+      query: {
+        keyWord: value,
+      }
+    })
   }
   
   const goHome = () => {
+    setActive("")
     history.push('/home');
   }
 
@@ -24,19 +33,23 @@ export default function Header() {
   function goTab(type:string) {
     switch(type) {
       case "article": {
+        setActive("article")
         history.push('/articles');
         break;
       }
       case "photo": {
-        history.push('/photoList');
+        setActive("photo")
+        history.push('/photos');
         break;
       }
       case "music": {
-        history.push('/musicList');
+        setActive("music")
+        history.push('/musics');
         break;
       }
       case "sundry": {
-        history.push('/sundryList');
+        setActive("sundry")
+        history.push('/sundries');
         break;
       }
     }
@@ -47,18 +60,26 @@ export default function Header() {
   
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
+  const IsActive = (type:string) => {
+    if(Active == type){
+      return styles.active
+    }else {
+      return null
+    }
+  }
+
   function Login() {
     if (isLoggedIn) {
       return (
-        <Button type="primary" onClick={goAdmin}>
-          后台
-        </Button>
+        <div className={styles.logo} onClick={()=>goAdmin()}>
+          <h1 className={styles.title}>后台</h1>
+        </div>
       )
     }
     return (
-      <Button type="primary" onClick={goLogin}>
-        登陆
-      </Button>
+      <div className={styles.logo} onClick={()=>goLogin()}>
+        <h1 className={styles.title}>登陆</h1>
+      </div>
     )
   }
 
@@ -66,25 +87,25 @@ export default function Header() {
 
   useEffect(() => {
     setIsLoggedIn(window.localStorage.getItem('username') ? true : false)
-    console.log(isLoggedIn)
   })
 
   return (
     <div>
       <div className={styles.header}>
         <div className={styles.logo} onClick={()=>goHome()}>
-          {/* <StarOutlined className={styles.logoStar} style={{ fontSize: '26px', color: 'white' }} /> */}
           <h1 className={styles.title}>星星点灯</h1>
         </div>
         <div className={styles.tabs}>
           { tabs.map((tab, index) => 
-            <div key={tab.name} className={styles.tab}>
-              <h2  onClick={() => goTab(tab.type)}>{tab.name}</h2>
+            <div className={IsActive(tab.type)}>
+              <div key={index} className={styles.tab}>
+                <h2 onClick={() => goTab(tab.type)}>{tab.name}</h2>
+              </div>
             </div>
           )}
         </div>
         <Search
-          allowClear
+          allowClear={false}
           enterButton="搜"
           size="middle"
           onSearch={goSearch}

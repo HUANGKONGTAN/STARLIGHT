@@ -55,6 +55,42 @@
   }
 }
 
+.sundry {
+  .gift();
+  width: 500px;
+  height: 100px;
+  display: flex;
+  .tab {
+    width: 150px;
+    border-radius: 10px;
+    background-color: rgb(48, 57, 82);
+    p {
+      line-height: 100px;
+      padding-top: 5px;
+      font-size: 40px;
+      font-family: 'C';
+      color: white;
+    }
+  }
+
+  .body {
+    width: 350px;
+    border-radius: 10px;
+    .title{
+      p {
+        line-height: 100px;
+        color: rgb(10, 61, 98);
+        font-weight: 320;
+        font-size: 36px;
+      }
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .photo {
   .gift();
   width: 500px;
@@ -109,16 +145,16 @@
   }
 
   .body {
+    .title {
+      height: 100px;
+      p {
+        margin:0;
+        font-weight: 280;
+        font-size:22px;
+        line-height: 100px;
+      }
+      // font-size: 30px;
 
+    }
   }
-}
-
-.musicTab {
-  // .tab();
-  background-color: rgb(196, 69, 105);
-}
-
-.sundryTab {
-  // .tab();
-  background-color: rgb(48, 57, 82);
 }

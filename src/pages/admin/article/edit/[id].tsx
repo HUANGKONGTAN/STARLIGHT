@@ -1,4 +1,4 @@
-import ArticleRender from '@/components/articleRender';
+import ArticleRender from '@/components/article/articleRender';
 
 function AdminEditArticles(props:any) {
   return(

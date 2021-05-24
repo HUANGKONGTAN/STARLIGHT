@@ -1,45 +1,43 @@
 import { Table, Button, Dropdown, Menu, Input, Modal, message, Space } from 'antd';
 import { useEffect, useState } from 'react';
-import { getArticle, getArticleList, deleteArticle } from '@/api/article';
+import { getSundry, getSundryList, deleteSundry } from '@/api/sundry';
 import { DownOutlined, EllipsisOutlined } from '@ant-design/icons';
 import styles from '@/less/admin/article/articles.less'
 import { history } from 'umi'
 
-function AdminArticles() {
+function AdminSundries() {
 
-  const [articleList, setArticleList] = useState([])
+  const [sundryList, setSundryList] = useState([])
 
   const [total, setTotal] = useState(0)
 
   const [PreviewModalVisible, setPreviewModalVisible] = useState(false);
 
-  const [DeleteModalVisible, setDeleteModalVisible] = useState(false);
- 
-  const [ArticleTitle, setArticleTitle] = useState("")
+  const [SundryTitle, setSundryTitle] = useState("")
 
-  const [ArticleContent, setArticleContent] = useState("")
+  const [SundryContent, setSundryContent] = useState("")
 
   useEffect(() => {
     loadArticleList()
   }, []);
 
   const loadArticleList = () => {
-    getArticleList({}).then(response=>{
+    getSundryList({}).then(response=>{
       if (typeof response === 'object' && response !== null){
         let data = (response as any).data
-        setArticleList(data.data)
+        setSundryList(data.data)
         setTotal(data.total)
       }
     })
   }
 
   const goPreview = (id:number) => {
-    getArticle({id:id}).then(response=>{
+    getSundry({id:id}).then(response=>{
       if (typeof response === 'object' && response !== null){
         let data = (response as any).data
         if(data.data != null){
-          setArticleTitle(data.data.Title)
-          setArticleContent(data.data.Content)
+          setSundryTitle(data.data.Title)
+          setSundryContent(data.data.Content)
           setPreviewModalVisible(true)
         }
       }
@@ -47,7 +45,7 @@ function AdminArticles() {
   }
 
   const goEdit = (id:number) => {
-    history.push(`/admin/article/edit/${id}`)
+    history.push(`/admin/sundry/edit/${id}`)
   }
 
   const goDelete = (id:number) => {
@@ -61,7 +59,7 @@ function AdminArticles() {
   }
 
   const DeleteArticle = (id:number) => {
-    deleteArticle({id:id}).then(response=>{
+    deleteSundry({id:id}).then(response=>{
       if((response as any).data.status === 200){
         message.success('删除成功！');
         loadArticleList();
@@ -142,7 +140,7 @@ function AdminArticles() {
         rowClassName={styles.tableRow}
         bordered={true}
         columns={columns} 
-        dataSource={articleList} 
+        dataSource={sundryList} 
         scroll={{ x: 1200, y: 400 }} 
         pagination={{ position: ['bottomCenter'], pageSize: 5}}
         rowKey={record => (record as any).ID}
@@ -153,14 +151,14 @@ function AdminArticles() {
         onCancel={()=> setPreviewModalVisible(false)}
       > 
         <div className={styles.preview}>
-          <h1>{ArticleTitle}</h1>
-          <p>{ArticleContent}</p>
+          <h1>{SundryTitle}</h1>
+          <p>{SundryContent}</p>
         </div>
       </Modal>
     </div>
   );
 }
 
-AdminArticles.wrappers = ['@/pages/wrappers/auth']
+AdminSundries.wrappers = ['@/pages/wrappers/auth']
 
-export default AdminArticles
+export default AdminSundries

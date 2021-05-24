@@ -4,7 +4,7 @@ import { history } from 'umi'
 
 export default function AdminSider() {  
 
-  const tabs = [{name:"首页", type:"home"}, {name:"文字", type:"articles"}, {name: "影相", type:"photo"}, {name:"音乐", type:"music"}, {name:"杂物", type:"sundry"}];
+  const tabs = [{name:"家", type:"home"}, {name:"文字", type:"articles"}, {name: "影相", type:"photos"}, {name:"音乐", type:"musics"}, {name:"杂物", type:"sundries"}];
 
   const goHome = () => {
     history.push('/home')

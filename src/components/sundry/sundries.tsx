@@ -1,55 +1,51 @@
-import { getArticleList } from '@/api/article';
-import styles from '@/less/articles.less';
+import { getSundryList } from '@/api/sundry';
+import styles from '@/less/article/articles.less';
 import { useEffect, useState } from 'react';
 import { history } from 'umi'
+import { formatDateTwo } from '@/tools/format';
 import { Divider, Pagination } from 'antd'
 
 export default function ArticleList() {
 
-  const [ArticleList, setArticleList] = useState([]);
+  const [SundryList, setSundryList] = useState([]);
 
   const [total, setTotal] = useState(0);
 
   const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
-    getArticleList({pageSize:5, pageNumber: pageNumber}).then(response=>{
+    getSundryList({pageSize:5, pageNumber: pageNumber}).then(response=>{
       if (typeof response === 'object' && response !== null){
         let data = (response as any).data
-        setArticleList(data.data)
+        setSundryList(data.data)
         setTotal(data.total)
       }
     })
   }, []);
 
   const goArticle = (id:string) => {
-    history.push( `/article/${id}`);
+    history.push( `/sundry/${id}`);
   }
 
   const onChange = (pageNumber:number) => {
     setPageNumber(pageNumber);
-    getArticleList({pageSize:5, pageNumber: pageNumber}).then(response=>{
+    getSundryList({pageSize:5, pageNumber: pageNumber}).then(response=>{
       if (typeof response === 'object' && response !== null){
         let data = (response as any).data
-        setArticleList(data.data)
+        setSundryList(data.data)
         setTotal(data.total)
       }
     })
-  }
-
-  const formatDate = (dateString:string) => {
-    let date = new Date(dateString)
-    return ` ${date.getMonth()+1}.${date.getDate()}.${date.getFullYear()}`
   }
   
   return (
     <div className={styles.articles}>
       <div className={styles.list}>
-        {ArticleList.map((article:any) => 
-          <div key={article.ID} className={styles.article}>
-            <h2 className={styles.title} onClick={() => goArticle(article.ID)}>{article.Title}</h2>
-            {article.Author}
-            {formatDate(article.CreatedAt)}
+        {SundryList.map((sundry:any) => 
+          <div key={sundry.ID} className={styles.article}>
+            <h2 className={styles.title} onClick={() => goArticle(sundry.ID)}>{sundry.Title}</h2>
+            {sundry.Author}
+            {formatDateTwo(sundry.CreatedAt)}
             <Divider />
           </div>
         )}

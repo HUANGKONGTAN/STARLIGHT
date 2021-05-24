@@ -1,9 +1,8 @@
 import styles from '@/less/index.less';
 import adminStyles from '@/less/admin/index.less';
 import Header from '@/components/header'
-import Sider from '@/components/sider';
 import AdminSider from '@/components/admin/sider'
-import { Divider, Button } from 'antd';
+import { Divider } from 'antd';
 import { history } from 'umi'
 
 function BasicLayout(props:any) {
@@ -22,11 +21,7 @@ function BasicLayout(props:any) {
         <div className={adminStyles.adminLayout}>
           <AdminSider></AdminSider>
           <div className={adminStyles.body}>
-            {/* <div className={adminStyles.header}>
-              <Button type="primary" onClick={goHome}>回家</Button>
-            </div> */}
             <Divider/>
-            {/* <h1 className={adminStyles.titleOne}>这个熵不断自增的世界需要有人来努力降低一些熵。</h1> */}
             <h1 className={adminStyles.titleTwo}>这个熵不断自增的世界需要有人来努力降低一些熵。</h1>
             <Divider/>
             {props.children}
@@ -45,10 +40,7 @@ function BasicLayout(props:any) {
         <div className={styles.layout}>
           <Header></Header>
           <div className={styles.body}>
-            <div className={styles.content}>
-              {props.children}
-            </div>
-            <Sider></Sider>
+            {props.children}
           </div>
           <div className={styles.footer}>
             <h2>天之涯，海之角，今宵别梦寒</h2>

@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 
 export default function ArticleRender(props:any) {
 
+  const [ID, setID] = useState(0);
+
   const [title, setTitle] = useState("");
 
   const [content, setContent] = useState("");
@@ -20,6 +22,7 @@ export default function ArticleRender(props:any) {
   
 
   let article = {
+    id: ID,
     title: title,
     content: content,
     author: author,
@@ -30,6 +33,7 @@ export default function ArticleRender(props:any) {
   
   const initArticle = (data:any, empty=false) => {
     if(!empty){
+      setID(props.id)
       setTitle(data.Title)
       setContent(data.Content)
       setAuthor(data.Author)
@@ -42,6 +46,7 @@ export default function ArticleRender(props:any) {
       let createdAt = `${date.getDate()}-${(date.getMonth()+1)}-${date.getFullYear()}`
       setCreatedAt(createdAt)
     }else{
+      setID(0)
       setTitle("出错啦。。。。")
       setContent(data)
       setAuthor("admin")
@@ -52,7 +57,6 @@ export default function ArticleRender(props:any) {
   }
 
   useEffect(() => {
-    console.log(props.id)
     getArticle({id: props.id}).then(response=>{
       if (typeof response === 'object' && response !== null){
         let data = (response as any).data
@@ -62,7 +66,6 @@ export default function ArticleRender(props:any) {
           initArticle(data.message, true)
         }
       }
-      console.log(article)
     })
   },[props.id]);
 

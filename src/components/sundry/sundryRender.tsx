@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 
 export default function SundryRender(props:any) {
 
+  const [ID, setID] = useState(0);
+
   const [title, setTitle] = useState("");
 
   const [content, setContent] = useState("");
@@ -20,6 +22,7 @@ export default function SundryRender(props:any) {
   
 
   let sundry = {
+    id: ID,
     title: title,
     content: content,
     author: author,
@@ -30,6 +33,7 @@ export default function SundryRender(props:any) {
   
   const initSundry = (data:any, empty=false) => {
     if(!empty){
+      setID(props.id)
       setTitle(data.Title)
       setContent(data.Content)
       setAuthor(data.Author)
@@ -39,6 +43,7 @@ export default function SundryRender(props:any) {
       let createdAt = `${date.getDate()}-${(date.getMonth()+1)}-${date.getFullYear()}`
       setCreatedAt(createdAt)
     }else{
+      setID(0)
       setTitle("出错啦。。。。")
       setContent(data)
       setAuthor("admin")

@@ -1,10 +1,10 @@
-import styles from '@/less/login.less';
 import { useEffect, useState } from 'react';
 import { Divider } from 'antd';
 import { history } from 'umi';
 import { findArticle } from '@/api/article'
 import { findSundry } from '@/api/sundry'
 import { formatDateTwo } from '@/tools/format';
+import styles from '@/less/search.less'
 
 export default function SearchReasult() {
 
@@ -41,12 +41,11 @@ export default function SearchReasult() {
   }, [(history.location.query as any).keyWord])
 
   function ArticleResult(){
-    console.log(articleList)
-    return articleList === null || articleList.length === 0 ? <div>"没找到哦。。。" </div> :
+    return articleList === null || articleList.length === 0 ? <div className={styles.none}>暂无相关内容</div> :
     <div className={styles.list}>
       {articleList.map((article:any) => 
-          <div key={article.ID} className={styles.article}>
-            <h2 className={styles.title} onClick={() => goArticle(article.ID)}>{article.Title}</h2>
+          <div className={styles.listItem} key={article.ID}>
+            <h2 onClick={() => goArticle(article.ID)}>{article.Title}</h2>
             {article.Author}
             {formatDateTwo(article.CreatedAt)}
             <Divider />
@@ -56,12 +55,11 @@ export default function SearchReasult() {
   }
 
   function SundryResult(){
-    console.log(sundryList)
-    return sundryList === null || sundryList.length === 0 ? <div>"没找到哦。。。" </div> :
+    return sundryList === null || sundryList.length === 0 ? <div className={styles.none}>暂无相关内容</div> :
     <div className={styles.list}>
       {sundryList.map((sundry:any) => 
-        <div key={sundry.ID} className={styles.article}>
-          <h2 className={styles.title} onClick={() => goSundry(sundry.ID)}>{sundry.Title}</h2>
+        <div className={styles.listItem} key={sundry.ID}>
+          <h2 onClick={() => goSundry(sundry.ID)}>{sundry.Title}</h2>
           {sundry.Author}
           {formatDateTwo(sundry.CreatedAt)}
           <Divider />
@@ -77,33 +75,17 @@ export default function SearchReasult() {
         <div className={styles.title}>
           文章搜索列表
         </div>
-        {/* <div className={styles.list}>
-          {articleList.map((article:any) => 
-              <div key={article.ID} className={styles.article}>
-                <h2 className={styles.title} onClick={() => goArticle(article.ID)}>{article.Title}</h2>
-                {article.Author}
-                {formatDateTwo(article.CreatedAt)}
-                <Divider />
-              </div>
-            )}
-        </div> */}
-        <ArticleResult/>
+        <div className={styles.content}>
+          <ArticleResult/>
+        </div>
       </div>
       <div className={styles.sundry}>
         <div className={styles.title}>
           杂项搜索结果
         </div>
-        {/* <div className={styles.list}>
-          {sundryList.map((sundry:any) => 
-              <div key={sundry.ID} className={styles.article}>
-                <h2 className={styles.title} onClick={() => goSundry(sundry.ID)}>{sundry.Title}</h2>
-                {sundry.Author}
-                {formatDateTwo(sundry.CreatedAt)}
-                <Divider />
-              </div>
-            )}
-        </div> */}
-        <SundryResult/>
+        <div className={styles.content}>
+          <SundryResult/>
+        </div>
       </div>
     </div>
       

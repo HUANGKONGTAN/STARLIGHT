@@ -86,10 +86,10 @@ function AdminArticles() {
   const columns= [
     {
       title: '标题',
-      width: 200,
+      width: 150,
       align: 'center',
       dataIndex: 'Title',
-      fixed: 'left'
+      // fixed: 'left'
     },
     {
       title: '频道',
@@ -111,15 +111,10 @@ function AdminArticles() {
       dataIndex: 'LikeAmount',
     },
     {
-      title: '状态',
-      align: 'center',
-      dataIndex: 'Published',
-    },
-    {
       title: '操作',
       align: 'center',
-      width: 260,
-      fixed: 'right',
+      width: 80,
+      // fixed: 'right',
       key: 'operation',
       render: (text: any, record: any) => 
       <div>
@@ -135,15 +130,14 @@ function AdminArticles() {
 
   return ( 
     <div className={styles.articlesTable}>
-      <div className={styles.searchGroup}>
-        <Input.Search allowClear style={{ width: '25%' }}/>
-      </div> 
+      {/* <div className={styles.searchGroup}>
+        <Input.Search allowClear style={{ width: '25%' }} />
+      </div>  */}
       <Table 
         rowClassName={styles.tableRow}
         bordered={true}
         columns={columns} 
         dataSource={articleList} 
-        scroll={{ x: 1200, y: 400 }} 
         pagination={{ position: ['bottomCenter'], pageSize: 5}}
         rowKey={record => (record as any).ID}
       />

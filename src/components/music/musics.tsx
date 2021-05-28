@@ -1,8 +1,7 @@
 import { getMusicList } from '@/api/music';
 import styles from '@/less/music/musics.less';
 import { useEffect, useState } from 'react';
-import { history } from 'umi'
-import { Divider, Pagination } from 'antd'
+import { Pagination } from 'antd'
 
 export default function ArticleList() {
 
@@ -36,23 +35,20 @@ export default function ArticleList() {
   return (
     <div className={styles.musics}>
       <div className={styles.list}>
-        {MusicList.map((music:any, index) => 
-            <div key={index} className={styles.music}>
-              <div className={styles.musicItem}>
-                <div className={styles.lyric}>
-                  <h2>{music.Lyric}</h2>
-                </div>
-                <div className={styles.info}>
-                  <div className={styles.name}>
-                    《{music.Name}》
-                  </div>
-                  <div className={styles.singer}>
-                    by {music.Singer}
-                  </div>
-                </div>
-              </div>
-              <Divider />
+        {MusicList.map((music:any) => 
+          <div key={music.id} className={styles.music}>
+            <div className={styles.lyric}>
+              <h2>{music.Lyric}</h2>
             </div>
+            <div className={styles.info}>
+              <div className={styles.name}>
+                《{music.Name}》
+              </div>
+              <div className={styles.singer}>
+                by {music.Singer}
+              </div>
+            </div>
+          </div>
         )}
         <Pagination showQuickJumper total={total} onChange={onChange} />
       </div>

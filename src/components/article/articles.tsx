@@ -11,10 +11,12 @@ export default function ArticleList() {
 
   const [total, setTotal] = useState(0);
 
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState(0);
+
+  const [pageSize, setPageSize] = useState(5)
 
   useEffect(() => {
-    getArticleList({pageSize:5, pageNumber: pageNumber}).then(response=>{
+    getArticleList({pageSize:pageSize, pageNumber: pageNumber}).then(response=>{
       if (typeof response === 'object' && response !== null){
         let data = (response as any).data
         setArticleList(data.data)
@@ -29,7 +31,7 @@ export default function ArticleList() {
 
   const onChange = (pageNumber:number) => {
     setPageNumber(pageNumber);
-    getArticleList({pageSize:5, pageNumber: pageNumber}).then(response=>{
+    getArticleList({pageSize: pageSize, pageNumber: pageNumber}).then(response=>{
       if (typeof response === 'object' && response !== null){
         let data = (response as any).data
         setArticleList(data.data)
@@ -54,7 +56,7 @@ export default function ArticleList() {
             <Divider />
           </div>
         )}
-        <Pagination showQuickJumper total={total} onChange={onChange} />
+        <Pagination showQuickJumper pageSize={pageSize} total={total} onChange={onChange} />
       </div>
     </div>
     

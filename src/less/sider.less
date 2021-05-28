@@ -1,6 +1,42 @@
 .sider {
-  width: 200px;
+  width: 230px;
   height: 90vh;
   background-color: #FFFAFA;
   border-left: 1px solid #F8F8FF;
+}
+
+.types {
+  padding:20px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  h2 {
+    font-family: 'C';
+    font-weight: 280;
+    font-size: 34px;
+    padding: 0px;
+    margin: 0px;
+  }
+  .title {
+    font-family: '';
+    border-bottom: 3px solid #483D8B;
+  }
+  user-select: none;
+}
+
+.type {
+  h2 {
+    text-align: center;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+
+.describe {
+  color: #666;
+  text-align: center;
 }

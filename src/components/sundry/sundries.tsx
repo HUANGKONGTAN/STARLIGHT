@@ -23,7 +23,7 @@ export default function ArticleList() {
     })
   }, []);
 
-  const goArticle = (id:string) => {
+  const goSundry = (id:string) => {
     history.push( `/sundry/${id}`);
   }
 
@@ -43,7 +43,7 @@ export default function ArticleList() {
       <div className={styles.list}>
         {SundryList.map((sundry:any) => 
           <div key={sundry.ID} className={styles.article}>
-            <h2 className={styles.title} onClick={() => goArticle(sundry.ID)}>{sundry.Title}</h2>
+            <h2 className={styles.title} onClick={() => goSundry(sundry.ID)}>{sundry.Title}</h2>
             {sundry.Author}
             {formatDateTwo(sundry.CreatedAt)}
             <Divider />

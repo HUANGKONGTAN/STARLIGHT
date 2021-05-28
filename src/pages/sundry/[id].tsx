@@ -1,4 +1,4 @@
-import SundryRender from '@/components/sundry/sundryRender';
+import SundryRender from '@/components/sundry/SundryRender';
 
 export default function SundryPage(props:any) {
   return ( 

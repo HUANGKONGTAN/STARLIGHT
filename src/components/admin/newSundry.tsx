@@ -1,19 +1,19 @@
-import { newArticle } from '@/api/article';
-import styles from '@/less/article/article.less'
+import { newSundry } from '@/api/sundry';
+import styles from '@/less/sundry/sundry.less'
 import { Input, Button, message } from 'antd'
 import { useState } from 'react';
 import { history } from 'umi'
 
 const { TextArea } = Input;
 
-export default function NewArticle() {
+export default function NewSundry() {
 
   const [title, setTitle] = useState("")
 
   const [content, setContent] = useState("")
 
   const goSubmit = () => {
-    newArticle({title:title, content:content}).then(response =>{
+    newSundry({title:title, content:content}).then(response =>{
       let data = (response as any).data
       let msg = data.message
       if(data.status === 200){

@@ -4,11 +4,11 @@ import styles from '@/less/article/articles.less'
 
 export default function Articles() {
   return ( 
-  <div className={styles.articlePage}>
-    <div className={styles.articleList}>
+  <div className={styles.Page}>
+    <div className={styles.List}>
       <ArticleList></ArticleList>
     </div>
-    <Sider></Sider>
+    <Sider type={"article"}></Sider>
   </div>
   );
 }

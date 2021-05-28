@@ -47,7 +47,7 @@ export default function Home() {
       if (typeof response === 'object' && response !== null){
         let data = (response as any).data
         if(data.data != null){
-          setPhoto(data.data.Title)
+          setPhoto(data.data.FileName)
         }
       }
     })
@@ -66,6 +66,10 @@ export default function Home() {
 
   const goArticle = (id:number) => {
     history.push(`/article/${id}`)
+  }
+
+  const goSundry = (id:number) => {
+    history.push(`/sundry/${id}`)
   }
 
   return ( 
@@ -88,7 +92,7 @@ export default function Home() {
       </div>
 
       {/* 杂七杂八 */}
-      <div className={styles.sundry}>
+      <div className={styles.sundry} onClick={()=> {goSundry(SundryID)}}>
         <div className={styles.body}>
           <div className={styles.title}>
             <p>{Sundry}</p>
@@ -118,7 +122,7 @@ export default function Home() {
           <p>今日摄影</p>
         </div>
         <div className={styles.body}>
-          <img className={styles.img} src={require('@/static/img/psb.jpeg')}/>  
+          <img className={styles.img} src={"https://wx1.sinaimg.cn/mw2000/"+Photo}/>  
         </div>
       </div>
 

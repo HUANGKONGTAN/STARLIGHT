@@ -29,3 +29,23 @@ export async function deleteArticle(params:any) {
 export async function findArticle(params:any) {
   return await fetchGet("/article/search", params)
 }
+
+//写文章
+export async function newArticle(params:any) {
+  return await fetchPost("/article", params)
+}
+
+//更新文章
+export async function updateArticle(params:any) {
+  return await fetchPut("/article", params)
+}
+
+//点赞文章
+export async function likeArticle(params:any) {
+  return await fetchGet("/article/like", params)
+}
+
+//文章增加浏览量
+export async function readArticle(params:any) {
+  return await fetchGet("/article/read", params)
+}

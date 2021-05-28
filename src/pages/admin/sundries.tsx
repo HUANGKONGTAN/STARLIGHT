@@ -87,7 +87,7 @@ function AdminSundries() {
       width: 200,
       align: 'center',
       dataIndex: 'Title',
-      fixed: 'left'
+      // fixed: 'left'
     },
     {
       title: '频道',
@@ -108,16 +108,16 @@ function AdminSundries() {
       width: 100,
       dataIndex: 'LikeAmount',
     },
-    {
-      title: '状态',
-      align: 'center',
-      dataIndex: 'Published',
-    },
+    // {
+    //   title: '状态',
+    //   align: 'center',
+    //   dataIndex: 'Published',
+    // },
     {
       title: '操作',
       align: 'center',
       width: 260,
-      fixed: 'right',
+      // fixed: 'right',
       key: 'operation',
       render: (text: any, record: any) => 
       <div>
@@ -133,15 +133,15 @@ function AdminSundries() {
 
   return ( 
     <div className={styles.articlesTable}>
-      <div className={styles.searchGroup}>
+      {/* <div className={styles.searchGroup}>
         <Input.Search allowClear style={{ width: '25%' }}/>
-      </div> 
+      </div>  */}
       <Table 
         rowClassName={styles.tableRow}
         bordered={true}
         columns={columns} 
         dataSource={sundryList} 
-        scroll={{ x: 1200, y: 400 }} 
+        // scroll={{ x: 1200, y: 400 }} 
         pagination={{ position: ['bottomCenter'], pageSize: 5}}
         rowKey={record => (record as any).ID}
       />

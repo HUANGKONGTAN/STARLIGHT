@@ -1,6 +1,8 @@
 import styles from '@/less/article/article.less';
 import { Input, Button, message } from 'antd'
 import { useEffect, useState } from 'react';
+import { likeArticle, readArticle, updateArticle } from '@/api/article'
+import { history  } from 'umi';
 
 const { TextArea } = Input;
 
@@ -10,14 +12,40 @@ export default function Article(props:any) {
 
   const [content, setContent] = useState("")
 
+  const [id, setID] = useState(0)
+
   const ILikeIt = () => {
-    message.success('点赞成功，感谢支持！');
+    likeArticle({id:props.article.id}).then(response => {
+      if((response as any).data.status === 200){
+        message.success('点赞成功，感谢支持！');
+      }
+    })
+  }
+
+  const UpdateArticle = () => {
+    updateArticle({id:id, title:title, content:content}).then(response =>{
+      let data = (response as any).data
+      let msg = data.message
+      if(data.status === 200){
+        message.success('提交成功！');  
+        history.push('/admin/articles');
+      }
+    })
   }
 
   useEffect(() => {
+    setID(parseInt(props.article.id))
     setTitle(props.article.title)
     setContent(props.article.content)
-  });
+  }, [props.article]);
+
+  useEffect(() => {
+    if(props.type === 'show' && props.article.id !== 0){
+      console.log("sss")
+      readArticle({id:props.article.id})
+    }
+  }, [props.article.id]);
+  
 
   if(props.type === 'show'){
     return (
@@ -29,7 +57,7 @@ export default function Article(props:any) {
           {props.article.content}
         </div>
         <div className={styles.info}>
-          <Button type='primary' onClick={()=> ILikeIt()}>点赞</Button>
+          <Button type='primary' onClick={ILikeIt}>点赞</Button>
           <p>{props.article.author} 作于 {props.article.createdAt}。</p>
         </div>
       </div>
@@ -52,7 +80,7 @@ export default function Article(props:any) {
           />
         </div>
         <div className={styles.info}>
-          <Button type='primary'>保存</Button>
+          <Button type='primary' onClick={UpdateArticle}>保存</Button>
           <p>{props.article.author} 作于 {props.article.createdAt}。</p>
         </div>
       </div>

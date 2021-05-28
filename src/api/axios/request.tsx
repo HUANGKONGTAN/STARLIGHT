@@ -36,9 +36,7 @@ export function fetchPost(url:string, params:any) {
 
 export function fetchPut(url:string, params:any) {
   return new Promise((resolve, reject) => {
-      HTTP.put(url, {
-        params: params
-      }).then(response => {
+      HTTP.put(url,params).then(response => {
         resolve(response);
       }, err => {
         reject(err);

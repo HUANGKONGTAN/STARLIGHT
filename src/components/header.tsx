@@ -71,16 +71,17 @@ export default function Header() {
   function Login() {
     if (isLoggedIn) {
       return (
-        <div className={styles.logo} onClick={()=>goAdmin()}>
+        <div className={styles.Admin} onClick={()=>goAdmin()}>
           <h1 className={styles.title}>后台</h1>
         </div>
       )
+    }else {
+      return (
+        <div className={styles.Admin} onClick={()=>goLogin()}>
+          <h1 className={styles.title}>登陆</h1>
+        </div>
+      )
     }
-    return (
-      <div className={styles.logo} onClick={()=>goLogin()}>
-        <h1 className={styles.title}>登陆</h1>
-      </div>
-    )
   }
 
   const tabs = [{name:"文字", type:"article"}, {name: "影相", type:"photo"}, {name:"音乐", type:"music"}, {name:"杂物", type:"sundry"}];

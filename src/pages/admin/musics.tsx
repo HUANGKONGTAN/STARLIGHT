@@ -1,7 +1,6 @@
 import { Table, Button, Dropdown, Menu, Input, Modal, message, Space } from 'antd';
 import { useEffect, useState } from 'react';
-import { getMusic, getMusicList, deleteMusic } from '@/api/music';
-import { DownOutlined, EllipsisOutlined } from '@ant-design/icons';
+import { getMusicList, deleteMusic } from '@/api/music';
 import styles from '@/less/admin/article/articles.less'
 import { history } from 'umi'
 
@@ -78,28 +77,28 @@ function AdminMusics() {
       width: 100,
       dataIndex: 'Singer',
     },
-    {
-      title: '操作',
-      align: 'center',
-      width: 50,
-      key: 'operation',
-      render: (text: any, record: any) => 
-      <div>
-          <Dropdown overlay={menu(record)} trigger={["click"]}>
-            <Button>       
-              <EllipsisOutlined/>
-              <DownOutlined />
-            </Button>
-          </Dropdown>
-      </div>
-    },
+    // {
+    //   title: '操作',
+    //   align: 'center',
+    //   width: 50,
+    //   key: 'operation',
+    //   render: (text: any, record: any) => 
+    //   <div>
+    //       <Dropdown overlay={menu(record)} trigger={["click"]}>
+    //         <Button>       
+    //           <EllipsisOutlined/>
+    //           <DownOutlined />
+    //         </Button>
+    //       </Dropdown>
+    //   </div>
+    // },
   ];
 
   return ( 
     <div className={styles.articlesTable}>
-      <div className={styles.searchGroup}>
+      {/* <div className={styles.searchGroup}>
         <Input.Search allowClear style={{ width: '25%' }}/>
-      </div> 
+      </div>  */}
       <Table 
         rowClassName={styles.tableRow}
         bordered={true}
